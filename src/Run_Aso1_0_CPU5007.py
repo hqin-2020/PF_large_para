@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
     Input_0 = [[D_0, Λ_scale, cd_scale] for i in range(N)]
     pool = multiprocessing.Pool()
-    Output_0 = pool.map(init, Input_0)
+    Output_0 = pool.map(init, tqdm(Input_0))
     θ_t_particle = [i[0] for i in Output_0]
     X_t_particle = [i[1] for i in Output_0]
     H_t_particle = [i[2] for i in Output_0]
