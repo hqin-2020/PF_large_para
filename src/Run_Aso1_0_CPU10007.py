@@ -16,15 +16,15 @@ if __name__ == '__main__':
     workdir = os.path.dirname(os.getcwd())
     srcdir = os.getcwd()
     datadir = workdir + '/data/'
-    outputdir = workdir + '/output/'
+    outputdir = '/project2/lhansen/particle_filtering/'
 
-    seed = 8
+    seed = 7
 
     obs_series = pd.read_csv(datadir + 'data.csv', delimiter=',')
     obs_series = np.array(obs_series.iloc[:,1:]).T
 
     T = obs_series.shape[1]
-    N = 800000
+    N = 1000000
     Λ_scale = 1.0
     cd_scale = 1.0
 

@@ -16,15 +16,15 @@ if __name__ == '__main__':
     workdir = os.path.dirname(os.getcwd())
     srcdir = os.getcwd()
     datadir = workdir + '/data/'
-    outputdir = workdir + '/output/'
+    outputdir = '/project2/lhansen/particle_filtering/'
 
-    seed = 7
+    seed = 8
 
     obs_series = pd.read_csv(datadir + 'data.csv', delimiter=',')
     obs_series = np.array(obs_series.iloc[:,1:]).T
 
     T = obs_series.shape[1]
-    N = 800000
+    N = 1000000
     Λ_scale = 1.0
     cd_scale = 1.0
 
@@ -50,10 +50,10 @@ if __name__ == '__main__':
 
     with open(casedir + 'θ_0.pkl', 'wb') as f:
         pickle.dump(θ_t_particle, f)
-    with open(casedir + 'X_0.pkl', 'wb') as f:
-        pickle.dump(X_t_particle, f)
-    with open(casedir + 'H_0.pkl', 'wb') as f:
-        pickle.dump(H_t_particle, f)
+    # with open(casedir + 'X_0.pkl', 'wb') as f:
+    #     pickle.dump(X_t_particle, f)
+    # with open(casedir + 'H_0.pkl', 'wb') as f:
+    #     pickle.dump(H_t_particle, f)
     with open(casedir + 'count_0.pkl', 'wb') as f:
         pickle.dump(list(np.ones(N)), f)
     with open(casedir + 'w_0.pkl', 'wb') as f:
@@ -78,10 +78,10 @@ if __name__ == '__main__':
         
         with open(casedir + 'θ_' + str(t+1) + '.pkl', 'wb') as f:
             pickle.dump(θ_t_next_particle, f)
-        with open(casedir + 'X_' + str(t+1) + '.pkl', 'wb') as f:
-            pickle.dump(X_t_next_particle, f)
-        with open(casedir + 'H_' + str(t+1) + '.pkl', 'wb') as f:
-            pickle.dump(H_t_next_particle, f)
+        # with open(casedir + 'X_' + str(t+1) + '.pkl', 'wb') as f:
+        #     pickle.dump(X_t_next_particle, f)
+        # with open(casedir + 'H_' + str(t+1) + '.pkl', 'wb') as f:
+        #     pickle.dump(H_t_next_particle, f)
         
         w_t_next = ν_t_next_particle/np.sum(ν_t_next_particle)
         try:
