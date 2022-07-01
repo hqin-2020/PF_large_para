@@ -1,7 +1,6 @@
 import numpy as np
 import scipy as sp
 import seaborn as sns
-from numba import njit
 sns.set()
 
 def simulate(θ_true, T):
@@ -174,7 +173,6 @@ def init(Input):
 
     return [θ0, X0, H0, ν0]
 
-@njit
 def bayes_para_update(bt, Λt, ct, dt, Rt_next, Zt_next):
     
     Λt_next = Λt + Rt_next@Rt_next.T

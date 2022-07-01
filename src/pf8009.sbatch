@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#SBATCH --job-name=pf5009
-#SBATCH --output=pf5009.out
-#SBATCH --error=pf5009.err
+#SBATCH --job-name=pf8009
+#SBATCH --output=pf8009.out
+#SBATCH --error=pf8009.err
 #SBATCH --time=36:00:00
 #SBATCH --partition=bigmem2
 #SBATCH --nodes=3
@@ -12,4 +12,4 @@
 # Load Python modules
 module load python/anaconda-2020.02
 
-python Run_Aso1_0_CPU5009.py 
+python Run_Aso1_0_CPU8009.py 
