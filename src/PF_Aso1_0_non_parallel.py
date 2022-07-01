@@ -205,7 +205,7 @@ def update_X(Dt_next, Xt, θt_next):
 def bayes_para_update(bt, Λt, ct, dt, Rt_next, Zt_next):
     
     Λt_next = Λt + Rt_next@Rt_next.T
-    bt_next = sp.linalg.solve(Λt_next, Λt@bt + Rt_next*Zt_next)
+    bt_next = np.linalg.solve(Λt_next, Λt@bt + Rt_next*Zt_next)
     ct_next = ct + 1
     dt_next = Zt_next**2 - bt_next.T@Λt_next@bt_next + bt.T@Λt@bt + dt
     
