@@ -3,7 +3,7 @@
 #SBATCH --job-name=pf5009
 #SBATCH --output=pf5009.out
 #SBATCH --error=pf5009.err
-#SBATCH --time=48:00:00
+#SBATCH --time=36:00:00
 #SBATCH --partition=bigmem2
 #SBATCH --nodes=4
 #SBATCH --cpus-per-task=28
