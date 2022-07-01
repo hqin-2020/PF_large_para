@@ -43,13 +43,14 @@ if __name__ == '__main__':
     Input_0 = [[D_0, Λ_scale, cd_scale] for i in range(N)]
     pool = multiprocessing.Pool()
     Output_0 = pool.map(init, tqdm(Input_0))
+    del(Input_0)
     θ_t_particle = [i[0] for i in Output_0]
     X_t_particle = [i[1] for i in Output_0]
     H_t_particle = [i[2] for i in Output_0]
-
-
+    del(Output_0)
     with open(casedir + 'θ_0.pkl', 'wb') as f:
         pickle.dump(θ_t_particle, f)
+    del(θ_t_particle)
     # with open(casedir + 'X_0.pkl', 'wb') as f:
     #     pickle.dump(X_t_particle, f)
     # with open(casedir + 'H_0.pkl', 'wb') as f:
@@ -59,31 +60,38 @@ if __name__ == '__main__':
     with open(casedir + 'w_0.pkl', 'wb') as f:
         pickle.dump(list(np.ones(N)/N), f)
     run_time = time.time() - start_time
-    print(run_time)    
-
-    del(θ_t_particle)
+    print(run_time)  
 
     for t in tqdm(range(T-1)):
         
         D_t_next = obs_series[:,[t+1]]
         
         Input = [[D_t_next, X_t_particle[i], H_t_particle[i], seed+t+i] for i in range(N)]
+        del(D_t_next)
+        del(X_t_particle)
+        del(H_t_particle)
+
         pool = multiprocessing.Pool()
         Output = pool.map(recursive, Input)
+        del(Input)
 
         θ_t_next_particle = [i[0] for i in Output]
         X_t_next_particle = [i[1] for i in Output]
         H_t_next_particle = [i[2] for i in Output]
         ν_t_next_particle = [i[3] for i in Output]    
-        
+        del(Output)
+
         with open(casedir + 'θ_' + str(t+1) + '.pkl', 'wb') as f:
             pickle.dump(θ_t_next_particle, f)
+        del(θ_t_next_particle)
         # with open(casedir + 'X_' + str(t+1) + '.pkl', 'wb') as f:
         #     pickle.dump(X_t_next_particle, f)
         # with open(casedir + 'H_' + str(t+1) + '.pkl', 'wb') as f:
         #     pickle.dump(H_t_next_particle, f)
-        
+
         w_t_next = ν_t_next_particle/np.sum(ν_t_next_particle)
+        del(ν_t_next_particle)
+
         try:
             count_all = sp.stats.multinomial.rvs(N, w_t_next)
         except:
@@ -95,15 +103,9 @@ if __name__ == '__main__':
         
         with open(casedir + 'w_' + str(t+1) + '.pkl', 'wb') as f:
             pickle.dump(w_t_next, f)
+        del(w_t_next)
         with open(casedir + 'count_' + str(t+1) + '.pkl', 'wb') as f:
             pickle.dump(count_all, f)
-        
-        del(X_t_particle)
-        del(H_t_particle)
-        del(w_t_next)
-        del(D_t_next)
-        del(θ_t_next_particle)
-        del(ν_t_next_particle)
         
         X_t_particle = []
         H_t_particle = []
@@ -113,7 +115,6 @@ if __name__ == '__main__':
                 for n in range(count_all[i]):
                     X_t_particle.append(X_t_next_particle[i])
                     H_t_particle.append(H_t_next_particle[i])
-        
         del(count_all)            
         del(X_t_next_particle)
         del(H_t_next_particle)
