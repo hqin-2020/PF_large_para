@@ -5,9 +5,9 @@
 #SBATCH --error=pf10009.err
 #SBATCH --time=36:00:00
 #SBATCH --partition=broadwl
-#SBATCH --nodes=30
-#SBATCH --cpus-per-task=8
-#SBATCH --mem-per-cpu=7000
+#SBATCH --nodes=12
+#SBATCH --cpus-per-task=28
+#SBATCH --mem=60G
 
 # Load Python modules
 module load python/anaconda-2020.02

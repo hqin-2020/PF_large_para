@@ -5,9 +5,9 @@
 #SBATCH --error=pf10008.err
 #SBATCH --time=36:00:00
 #SBATCH --partition=broadwl
-#SBATCH --nodes=20
-#SBATCH --cpus-per-task=14
-#SBATCH --mem-per-cpu=4000
+#SBATCH --nodes=12
+#SBATCH --cpus-per-task=28
+#SBATCH --mem=60G
 
 # Load Python modules
 module load python/anaconda-2020.02

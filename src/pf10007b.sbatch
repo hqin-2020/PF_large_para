@@ -5,7 +5,7 @@
 #SBATCH --error=pf10007.err
 #SBATCH --time=36:00:00
 #SBATCH --partition=broadwl
-#SBATCH --nodes=10
+#SBATCH --nodes=12
 #SBATCH --cpus-per-task=28
 #SBATCH --mem=60G
 
