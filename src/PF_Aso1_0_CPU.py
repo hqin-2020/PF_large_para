@@ -30,7 +30,7 @@ def simulate(θ_true, T):
     D = np.ones((3,1)) @ Z[[0],:] + S
     
     return D
-    
+
 def decompose_θ(θ):
     
     λ = θ[1][1,1]; η = θ[0][1,0]
@@ -157,8 +157,8 @@ def init_X(θ, D_0):
     return μ0, Σ0
 
 
-def init(D0, Λ_scale, cd_scale):
-    
+def init(Input):
+    D0, Λ_scale, cd_scale = Input
     H0 = init_H(Λ_scale, cd_scale)
     Σ0_postive = False
     while Σ0_postive == False:
@@ -172,7 +172,7 @@ def init(D0, Λ_scale, cd_scale):
     X0 = sp.stats.multivariate_normal.rvs(μ0.flatten(), Σ0).reshape(-1,1)
     ν0 = 1
 
-    return θ0, X0, H0, ν0
+    return [θ0, X0, H0, ν0]
 
 @njit
 def bayes_para_update(bt, Λt, ct, dt, Rt_next, Zt_next):

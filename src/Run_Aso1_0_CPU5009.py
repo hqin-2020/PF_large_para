@@ -39,14 +39,13 @@ if __name__ == '__main__':
     start_time = time.time()
 
     D_0 = obs_series[:,[0]]
-    θ_t_particle = []
-    X_t_particle = []
-    H_t_particle = []
-    for i in range(N):
-        θ_0, X_0, H_0, _ = init(D_0, Λ_scale, cd_scale)
-        θ_t_particle.append(θ_0)
-        X_t_particle.append(X_0)
-        H_t_particle.append(H_0)
+
+    Input_0 = [[D_0, Λ_scale, cd_scale] for i in range(N)]
+    pool = multiprocessing.Pool()
+    Output_0 = pool.map(init, Input_0)
+    θ_t_particle = [i[0] for i in Output_0]
+    X_t_particle = [i[1] for i in Output_0]
+    H_t_particle = [i[2] for i in Output_0]
 
     with open(casedir + 'θ_0.pkl', 'wb') as f:
         pickle.dump(θ_t_particle, f)
