@@ -48,17 +48,17 @@ if __name__ == '__main__':
     X_t_particle = [i[1] for i in Output_0]
     H_t_particle = [i[2] for i in Output_0]
     del(Output_0)
-    with open(casedir + 'θ_0.pkl', 'wb') as f:
-        pickle.dump(θ_t_particle, f)
+    # with open(casedir + 'θ_0.pkl', 'wb') as f:
+    #     pickle.dump(θ_t_particle, f)
     del(θ_t_particle)
     # with open(casedir + 'X_0.pkl', 'wb') as f:
     #     pickle.dump(X_t_particle, f)
     # with open(casedir + 'H_0.pkl', 'wb') as f:
     #     pickle.dump(H_t_particle, f)
-    with open(casedir + 'count_0.pkl', 'wb') as f:
-        pickle.dump(list(np.ones(N)), f)
-    with open(casedir + 'w_0.pkl', 'wb') as f:
-        pickle.dump(list(np.ones(N)/N), f)
+    # with open(casedir + 'count_0.pkl', 'wb') as f:
+    #     pickle.dump(list(np.ones(N)), f)
+    # with open(casedir + 'w_0.pkl', 'wb') as f:
+    #     pickle.dump(list(np.ones(N)/N), f)
     run_time = time.time() - start_time
     print(run_time)    
     
@@ -81,7 +81,7 @@ if __name__ == '__main__':
         ν_t_next_particle = [i[3] for i in Output]    
         del(Output)
 
-        if t in [50,100,150,200,250, 282]:
+        if t in [50,100,200,282]:
             with open(casedir + 'θ_' + str(t+1) + '.pkl', 'wb') as f:
                 pickle.dump(θ_t_next_particle, f)
         del(θ_t_next_particle)
@@ -101,11 +101,11 @@ if __name__ == '__main__':
                     w_t_next[i] = w_t_next[i] - (np.sum(w_t_next[:-1]) - 1)
                     break
             count_all = sp.stats.multinomial.rvs(N, w_t_next)
-        if t in [50,100,150,200,250, 282]:
+        if t in [50,100,200,282]:
             with open(casedir + 'w_' + str(t+1) + '.pkl', 'wb') as f:
                 pickle.dump(w_t_next, f)
         del(w_t_next)
-        if t in [50,100,150,200,250, 282]:
+        if t in [50,100,200,282]:
             with open(casedir + 'count_' + str(t+1) + '.pkl', 'wb') as f:
                 pickle.dump(count_all, f)
         
