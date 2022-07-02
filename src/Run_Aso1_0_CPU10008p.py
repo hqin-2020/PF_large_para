@@ -59,7 +59,7 @@ if __name__ == '__main__':
     #     pickle.dump(list(np.ones(N)), f)
     # with open(casedir + 'w_0.pkl', 'wb') as f:
     #     pickle.dump(list(np.ones(N)/N), f)
-    # run_time = time.time() - start_time
+    run_time = time.time() - start_time
     print(run_time)    
     
     for t in tqdm(range(T-1)):
